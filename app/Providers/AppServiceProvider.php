@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Providers;
+namespace ExpenseTracker\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
