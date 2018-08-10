@@ -13,10 +13,13 @@ class BillCard extends Component {
         if (j == 3 && k != 13) {
             return i + "rd";
         }
+
         return i + "th";
     }
 
     render() {
+        const deleteRoute = '/bills/' + this.props.bill.id;
+
         return(
             <div className="panel panel-default">
                 <div className="panel-heading">
@@ -33,8 +36,12 @@ class BillCard extends Component {
                             <p>{this.getDateWithSuffix(this.props.bill.due_date)}</p>
                         </div>
                     </div>
-                    <a href="" className="btn btn-danger btn-sm">Delete Bill</a>
-                    <a href="" className="btn btn-default btn-sm pull-right">Edit Bill</a>
+                    <form method="POST" action={deleteRoute} className="form-inline pull-left">
+                        <input name="_method" type="hidden" value="DELETE" />
+                        <input name="_token" type="hidden" value={window.Laravel.csrfToken} />
+                        <button className="btn btn-danger btn-sm" type="submit">Delete Bill</button>
+                    </form>
+                    <a href={'/bills/' + this.props.bill.id + '/edit'} className="btn btn-default btn-sm pull-right">Edit Bill</a>
                 </div>
             </div>
         )

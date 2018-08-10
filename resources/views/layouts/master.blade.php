@@ -49,6 +49,10 @@
         <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js" crossorigin></script>
     @endif
 
+    <script>
+        window.Laravel = {!! json_encode(['csrfToken' => csrf_token()]) !!};
+    </script>
+
     <script src="/js/common.js"></script>
     <script src="/js/app.js"></script>
 </body>

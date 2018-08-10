@@ -20040,11 +20040,14 @@ var BillCard = function (_Component) {
             if (j == 3 && k != 13) {
                 return i + "rd";
             }
+
             return i + "th";
         }
     }, {
         key: "render",
         value: function render() {
+            var deleteRoute = '/bills/' + this.props.bill.id;
+
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 "div",
                 { className: "panel panel-default" },
@@ -20095,13 +20098,19 @@ var BillCard = function (_Component) {
                         )
                     ),
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        "a",
-                        { href: "", className: "btn btn-danger btn-sm" },
-                        "Delete Bill"
+                        "form",
+                        { method: "POST", action: deleteRoute, className: "form-inline pull-left" },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", { name: "_method", type: "hidden", value: "DELETE" }),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", { name: "_token", type: "hidden", value: window.Laravel.csrfToken }),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            "button",
+                            { className: "btn btn-danger btn-sm", type: "submit" },
+                            "Delete Bill"
+                        )
                     ),
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                         "a",
-                        { href: "", className: "btn btn-default btn-sm pull-right" },
+                        { href: '/bills/' + this.props.bill.id + '/edit', className: "btn btn-default btn-sm pull-right" },
                         "Edit Bill"
                     )
                 )
