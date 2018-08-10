@@ -10,9 +10,21 @@ use Carbon\Carbon;
 class BillsController extends Controller
 {
     /**
+     * view all bills
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function index()
+    {
+        $bills = Bill::all();
+
+        return view('bills.index', compact('bills'));
+    }
+
+    /**
      * create new bill
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create()
     {
@@ -22,12 +34,13 @@ class BillsController extends Controller
     /**
      * store new bill
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @param BillRequest $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function store(BillRequest $request)
     {
         $newBill = $request->all();
-        $newBill['due_date'] = Carbon::parse($request->due_date)->format('m-d');
+        $newBill['due_date'] = Carbon::parse($request->due_date)->format('d');
 
         Bill::create($newBill);
 

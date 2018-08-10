@@ -1,10 +1,13 @@
 /* ---- Global Requirements ---- */
-require('./bootstrap');
 import React from 'react';
 import ReactDOM from 'react-dom';
 
 /* ---- ReactJS Components ---- */
-// import HelloWorld from './components/HelloWorld';
+import BillList from './components/BillList';
 
 /* ---- Initialize ReactJS Components ---- */
-// ReactDOM.render(<HelloWorld />, document.getElementById('like_button_container'));
+if ($('#bills-list').length) {
+    const bills = $('#bills-list').data('bills');
+
+    ReactDOM.render(<BillList bills={bills}/>, document.getElementById('bills-list'));
+}
