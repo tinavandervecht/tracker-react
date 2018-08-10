@@ -528,8 +528,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* ---- Initialize ReactJS Components ---- */
 if ($('#bills-list').length) {
     var bills = $('#bills-list').data('bills');
+    var listType = $('#bills-list').data('list-type') ? $('#bills-list').data('list-type') : null;
 
-    __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__components_BillList__["a" /* default */], { bills: bills }), document.getElementById('bills-list'));
+    __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__components_BillList__["a" /* default */], { bills: bills, listType: listType }), document.getElementById('bills-list'));
 }
 
 /***/ }),
@@ -19963,23 +19964,69 @@ var BillList = function (_Component) {
     }
 
     _createClass(BillList, [{
+        key: 'getBillList',
+        value: function getBillList(bills) {
+            var _this2 = this;
+
+            if (_.isEmpty(bills)) {
+                return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'p',
+                    null,
+                    'You\'re good! No bills here.'
+                );
+            }
+
+            return bills.map(function (row, key) {
+                return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'div',
+                    { key: key, className: 'row' },
+                    _this2.returnBillComponent(row, _this2.props.listType)
+                );
+            });
+        }
+    }, {
+        key: 'returnBillComponent',
+        value: function returnBillComponent(row) {
+            var _this3 = this;
+
+            var listType = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+
+            return listType && listType == 'minimalist' ? row.map(function (bill) {
+                return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'div',
+                    { key: bill.id, className: 'bill-list-item' },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'p',
+                        { className: _this3.getDaysLeft(bill) < 5 ? 'text-danger' : '' },
+                        'Due in ',
+                        _this3.getDaysLeft(bill),
+                        ' days - ',
+                        bill.name,
+                        ' - $',
+                        bill.amount
+                    )
+                );
+            }) : row.map(function (bill) {
+                return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'div',
+                    { key: bill.id, className: 'col-md-6' },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__BillCard__["a" /* default */], { bill: bill })
+                );
+            });
+        }
+    }, {
+        key: 'getDaysLeft',
+        value: function getDaysLeft(bill) {
+            var d = new Date();
+
+            return bill.due_date - d.getDate();
+        }
+    }, {
         key: 'render',
         value: function render() {
             var splitBills = _.chunk(this.props.bills, 2);
 
-            return splitBills.map(function (row, key) {
-                return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    'div',
-                    { key: key, className: 'row' },
-                    row.map(function (bill) {
-                        return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            'div',
-                            { key: bill.id, className: 'col-md-6' },
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__BillCard__["a" /* default */], { bill: bill })
-                        );
-                    })
-                );
-            });
+            return this.getBillList(splitBills);
         }
     }]);
 
