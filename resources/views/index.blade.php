@@ -2,8 +2,14 @@
 
 @section('body')
     <div class="text-center">
-        <h1>Expense Tracker</h1>
-        <h2>Money in, money out.</h2>
-        <div id="like_button_container"></div>
+        <div class="row">
+            <div class="col-md-6">
+                <h3>Bills</h3>
+                <a href="{{ route('bills.create') }}">Create Bill</a>
+            </div>
+            <div class="col-md-6">
+                <h3>Expenses</h3>
+            </div>
+        </div>
     </div>
 @endsection

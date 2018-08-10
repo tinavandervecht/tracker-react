@@ -20,6 +20,22 @@
     @yield('header')
 
     <div class="container">
+        <div class="text-center">
+            <h1>Expense Tracker</h1>
+            <h2>Money in, money out.</h2>
+
+            @yield('page-title')
+
+            @if (session('success'))
+                <div class="alert alert-success">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    {{ session('success') }}
+                </div>
+            @endif
+        </div>
+
         @yield('body')
     </div>
 
