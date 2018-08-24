@@ -14,7 +14,7 @@ class BillRequest extends Request
         return [
             'name' => 'required',
             'amount' => 'required|numeric',
-            'due_date' => 'required|date'
+            'due_date' => 'required|numeric'
         ];
     }
 
@@ -30,7 +30,7 @@ class BillRequest extends Request
             'amount.required' => 'Amount is required',
             'amount.numeric' => 'Amount must be a number',
             'due_date.required' => 'Due Date is required',
-            'due_date.date' => 'Due Date must be a date',
+            'due_date.numeric' => 'Due Date must be a number',
         ];
     }
 }

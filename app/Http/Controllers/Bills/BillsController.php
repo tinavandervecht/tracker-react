@@ -5,7 +5,6 @@ namespace ExpenseTracker\Http\Controllers\Bills;
 use ExpenseTracker\Http\Controllers\Controller;
 use ExpenseTracker\Http\Requests\BillRequest;
 use ExpenseTracker\Models\Bill;
-use Carbon\Carbon;
 
 class BillsController extends Controller
 {
@@ -39,10 +38,7 @@ class BillsController extends Controller
      */
     public function store(BillRequest $request)
     {
-        $newBill = $request->all();
-        $newBill['due_date'] = Carbon::parse($request->due_date)->format('d');
-
-        Bill::create($newBill);
+        Bill::create($request->all());
 
         return redirect()->route('home')->withSuccess('Bill created successfully');
     }
@@ -65,10 +61,7 @@ class BillsController extends Controller
      */
     public function update(BillRequest $request, Bill $bill)
     {
-        $updatedBill = $request->all();
-        $updatedBill['due_date'] = Carbon::parse($request->due_date)->format('d');
-
-        $bill->update($updatedBill);
+        $bill->update($request->all());
 
         return redirect()->route('bills.index')->withSuccess('Bill updated successfully');
     }
