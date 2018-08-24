@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import BillCard from './BillCard';
 
 class BillList extends Component {
@@ -19,13 +20,14 @@ class BillList extends Component {
             ? row.map((bill) => (
                     <div key={bill.id} className="bill-list-item">
                         <p className={this.getDaysLeft(bill) < 5 ? 'text-danger' : ''}>
+                            <input name={"bill[" + bill.id + "][paid]"} type="checkbox" onClick={this.togglePaid} />
                             Due in {this.getDaysLeft(bill)} days - {bill.name} - ${bill.amount}
                         </p>
                     </div>
                 ))
             : row.map((bill) => (
                     <div key={bill.id} className="col-md-6">
-                        <BillCard bill={bill} />
+                        <BillCard bill={bill} onTogglePaid={this.togglePaid} />
                     </div>
                 ))
     };
@@ -34,6 +36,25 @@ class BillList extends Component {
         var d = new Date();
 
         return (bill.due_date - d.getDate());
+    };
+
+    togglePaid({target}) {
+        let ID = $(target).attr('name').replace('bill[', '').replace('][paid]', '');
+        let route = `/ajax/bills/${ID}/update`;
+
+        target.parentNode.style.textDecoration = target.checked
+            ? "line-through"
+            : '';
+
+        axios.post(route, {
+            paid: target.checked,
+        })
+        .then(function (response) {
+        })
+        .catch(function (error) {
+            target.parentNode.style.textDecoration = '';
+            $(target).prop('checked', false);
+        });
     };
 
     render() {

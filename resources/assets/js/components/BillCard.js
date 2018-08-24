@@ -23,7 +23,12 @@ class BillCard extends Component {
         return(
             <div className="panel panel-default">
                 <div className="panel-heading">
-                    <p className='panel-title'>Bill: {this.props.bill.name}</p>
+                    <div className='panel-title' style={{textDecoration: this.props.bill.paid ? 'line-through' : ''}}>
+                        <input name={"bill[" + this.props.bill.id + "][paid]"} type="checkbox" defaultChecked={this.props.bill.paid} onClick={this.props.onTogglePaid} />
+                        Bill: {this.props.bill.name}
+                        <span className={"pull-right fa fa-lg " + (this.props.bill.paid ? 'fa-check text-success' : 'fa-close text-danger')}>
+                        </span>
+                    </div>
                 </div>
                 <div className="panel-body">
                     <div className="row">

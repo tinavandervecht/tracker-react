@@ -15,5 +15,6 @@ class Bill extends Model
         'name',
         'amount',
         'due_date',
+        'paid'
     ];
 }

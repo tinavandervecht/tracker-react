@@ -15,12 +15,17 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $currentDay = Carbon::now()->format('d');
-        $latestDay = Carbon::now()->addWeeks(2)->format('d');
+        $currentDate = Carbon::now();
+        $latestDate = Carbon::now()->addWeeks(2);
+        $bills = Bill::get();
+        $upcomingBills = $bills->filter(function($bill) use ($currentDate, $latestDate) {
+            $year = Carbon::now()->format('Y');
+            $month = Carbon::now()->format('m');
 
-        $upcomingBills = Bill::where('due_date', '>=', $currentDay)
-            ->where('due_date', '<=', $latestDay)
-            ->get();
+            return Carbon::parse($year . '-' . $month . '-' . $bill->due_date)
+                ->between($currentDate, $latestDate)
+                && !$bill->paid;
+        })->values();
 
         return view('index', compact('upcomingBills'));
     }
