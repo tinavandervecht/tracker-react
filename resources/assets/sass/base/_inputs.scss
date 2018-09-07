@@ -1,0 +1,156 @@
+.form-group {
+    position:relative;
+    margin-bottom: 20px;
+
+    span {
+        color: $brand-primary;
+        position: absolute;
+        top: 0px;
+        left: 15px;
+        @include opacity(0);
+        @include transition(all 0.2s ease-in-out);
+    }
+
+    .form-control {
+        box-sizing: border-box;
+        display: block;
+        border: none;
+        padding: 15px;
+        outline: none;
+        @include transition(all 0.2s ease-in-out);
+        height:auto;
+        @include box-shadow(none);
+        border:1px solid $text-color;
+
+        &::placeholder {
+            @include transition(all 0.2s ease-in-out);
+        }
+
+        &:focus, &.populated {
+            padding-top: 23px;
+            padding-bottom: 7px;
+
+            &::placeholder {
+                color: transparent;
+            }
+
+            & + span {
+                @include opacity(1);
+                top: 5px;
+            }
+        }
+    }
+}
+
+.checkbox {
+    line-height:1.5em;
+    margin-top:13px;
+    margin-bottom:13px;
+}
+
+.checkbox label {
+    padding-left:0px;
+}
+
+.checkbox label {
+    input[type="checkbox"] {
+        display:none;
+    }
+
+    .label-text {
+        position:relative;
+        padding-left:30px;
+        cursor:pointer;
+        color:$text-muted;
+        z-index:0;
+
+        .input {
+            position: absolute;
+            left: 0;
+            top:0px;
+            width: 20px;
+            height: 20px;
+            @include border-radius(50%);
+            border: 1px solid $input-border;
+            background: white;
+            &.darken-border{
+                border-color: darken($input-border,30);
+            }
+            .check {
+                position: absolute;
+                left: 7px;
+                top: 4px;
+                border: solid transparent;
+                border-width: 0 1px 1px 0;
+                border-color: white;
+                @include transform(rotate(45deg));
+                width: 4px;
+                height: 8px;
+                z-index: -1;
+                @include opacity(0);
+                @include transition(0.4s);
+            }
+
+            &:before {
+                z-index: -1;
+                content: '';
+                position: absolute;
+                top: -50%;
+                left: -50%;
+                height: 200%;
+                width: 200%;
+                display: block;
+                @include border-radius(50%);
+                @include transition(0.4s);
+            }
+
+            &:after {
+                z-index: 0;
+                content: '';
+                display: block;
+                height: 100%;
+                width: 100%;
+                background: $brand-primary;
+                @include border-radius(50%);
+                @include transform(scale(0));
+                @include transition(0.2s);
+            }
+        }
+    }
+
+    &:active {
+        .label-text {
+            .input {
+                &:before {
+                    background:$input-border;
+                }
+            }
+        }
+    }
+
+    input[type="checkbox"]:checked {
+        + .label-text {
+            color:$text-color;
+
+            .input {
+                border-color:$brand-primary;
+                &:after {
+                    @include transform(scale(0.85));
+                }
+
+                .check {
+                    @include opacity(1);
+                    z-index:1;
+                }
+            }
+
+            a {
+                color: $link-hover-color;
+            }
+        }
+    }
+}
+
+.checkbox.disabled label {
+    @include opacity(0.60);
+}

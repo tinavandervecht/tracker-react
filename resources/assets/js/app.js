@@ -14,3 +14,25 @@ if ($('#bills-list').length) {
 
     ReactDOM.render(<BillList bills={bills} listType={listType}/>, document.getElementById('bills-list'));
 }
+
+$(document).ready(function() {
+    $('[data-toggle="tooltip"]').tooltip();
+
+    $('.form-control').on('change', function() {
+        if ($(this).val().length) {
+            $(this).addClass('populated');
+        } else {
+            $(this).removeClass('populated');
+        }
+    });
+
+    if ($('.disable-on-submit').length) {
+        $('.disable-on-submit').each(function() {
+            $(this).submit(function(){
+                $(this).find('button[type=submit]').prop('disabled', true);
+                $(this).find('button[type=submit]').html('Processing...');
+                $(this).find('button[type=submit]').addClass('disabled');
+            })
+        })
+    }
+})

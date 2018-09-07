@@ -1,0 +1,13 @@
+.user-nav {
+    position: fixed;
+    width: calc(100% - 60px);
+    background: $text-color;
+    z-index: 1;
+    left:60px;
+    color: #FFFFFF;
+    padding: 16px;
+
+    p {
+        margin-bottom:0;
+    }
+}

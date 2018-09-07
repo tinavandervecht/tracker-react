@@ -5,10 +5,14 @@
 @endsection
 
 @section('body')
-    <ul class="list-inline">
-        <li><a href="{{ route('home') }}">Home</a></li>
-        <li>|</li>
-        <li><a href="{{ route('bills.create') }}">Create Bill</a></li>
-    </ul>
+    <div class="row m-b-1">
+        <div class="col-md-8">
+            <h1 class="m-t-0">Manage Bills</h1>
+        </div>
+        <div class="col-md-4 text-right">
+            <a class="btn btn-primary" href="{{ route('bills.create') }}">Create Bill</a>
+        </div>
+    </div>
+    @include('layouts.partials.success-alert')
     <div id="bills-list" data-bills="{{ json_encode($bills) }}"></div>
 @endsection

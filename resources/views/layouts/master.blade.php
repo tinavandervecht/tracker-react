@@ -12,7 +12,7 @@
     @include('layouts.partials.favicon')
 
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'/>
-    <link href="https://fonts.googleapis.com/css?family=Permanent+Marker|Quicksand:400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Concert+One|Quicksand:400,700" rel="stylesheet">
     <link href="/css/app.css" rel='stylesheet' type='text/css'>
 </head>
 <body>
@@ -20,24 +20,16 @@
 
     @yield('header')
 
-    <div class="container">
-        <div class="text-center">
-            <h1>Expense Tracker</h1>
-            <h2>Money in, money out.</h2>
-
-            @yield('page-title')
-
-            @if (session('success'))
-                <div class="alert alert-success">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    {{ session('success') }}
-                </div>
-            @endif
+    @if(Auth::check())
+        @include('layouts.partials.user-nav')
+    @endif
+    <div class="dashboard-layout clearfix">
+        @if(Auth::check())
+            @include('layouts.partials.site-nav')
+        @endif
+        <div class="container-max">
+            @yield('body')
         </div>
-
-        @yield('body')
     </div>
 
     @yield('footer')

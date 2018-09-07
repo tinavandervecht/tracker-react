@@ -18,11 +18,3 @@ Route::get('/', [
 Route::group(['namespace' => 'Bills'], function () {
     Route::resource('bills', 'BillsController');
 });
-
-Route::group(['namespace' => 'Ajax'], function () {
-    Route::group(['namespace' => 'Bills'], function () {
-        Route::post('/ajax/bills/{bill}/update', [
-            'as' => 'ajax.bills.update', 'uses' => 'BillsController@update'
-        ]);
-    });
-});

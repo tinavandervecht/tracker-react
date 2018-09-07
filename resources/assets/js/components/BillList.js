@@ -9,7 +9,7 @@ class BillList extends Component {
         }
 
         return bills.map((row, key) => (
-            <div key={key} className="row">
+            <div key={key} className={this.props.listType == 'minimalist' ? '' : 'row'}>
                 {this.returnBillComponent(row, this.props.listType)}
             </div>
         ));
@@ -19,15 +19,24 @@ class BillList extends Component {
         return listType && listType == 'minimalist'
             ? row.map((bill) => (
                     <div key={bill.id} className="bill-list-item">
-                        <p className={this.getDaysLeft(bill) < 5 ? 'text-danger' : ''}>
-                            <input name={"bill[" + bill.id + "][paid]"} type="checkbox" onClick={this.togglePaid} />
-                            Due in {this.getDaysLeft(bill)} days - {bill.name} - ${bill.amount}
-                        </p>
+                        <div className={this.getDaysLeft(bill) < 5 ? 'text-danger' : ''}>
+                            <div className="checkbox">
+                                <label>
+                                    <input name={"bill[" + bill.id + "][paid]"} type="checkbox" onClick={this.togglePaid} />
+                                    <div className="label-text">
+                                        <div className="input">
+                                            <div className="check"></div>
+                                        </div>
+                                        Due in {this.getDaysLeft(bill)} days - {bill.name} - ${bill.amount}
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
                     </div>
                 ))
             : row.map((bill) => (
-                    <div key={bill.id} className="col-md-6">
-                        <BillCard bill={bill} onTogglePaid={this.togglePaid} />
+                    <div key={bill.id} className="col-md-4">
+                        <BillCard bill={bill} />
                     </div>
                 ))
     };
@@ -58,7 +67,7 @@ class BillList extends Component {
     };
 
     render() {
-        const splitBills = _.chunk(this.props.bills, 2);
+        const splitBills = _.chunk(this.props.bills, 3);
 
         return(
             this.getBillList(splitBills)

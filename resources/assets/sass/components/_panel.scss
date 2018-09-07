@@ -1,0 +1,13 @@
+.panel {
+    @include box-shadow(0px 6px 20px 0px rgba(79,79,79,.6))
+    border:none;
+    @include border-radius(8px);
+
+    .panel-body {
+        h1:first-child, .h1:first-child,
+        h2:first-child, .h2:first-child,
+        h3:first-child, .h3:first-child {
+            margin-top:0;
+        }
+    }
+}

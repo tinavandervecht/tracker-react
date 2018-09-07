@@ -1,6 +1,6 @@
 <?php
 
-namespace ExpenseTracker\Http\Controllers\Bills;
+namespace ExpenseTracker\Http\Controllers\Client\Bills;
 
 use ExpenseTracker\Http\Controllers\Controller;
 use ExpenseTracker\Http\Requests\BillRequest;

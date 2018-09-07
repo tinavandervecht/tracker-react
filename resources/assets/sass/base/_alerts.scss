@@ -1,0 +1,3 @@
+.alert-success {
+    @include alert-variant($brand-primary, $brand-primary, #ffffff);
+}

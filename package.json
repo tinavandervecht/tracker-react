@@ -19,6 +19,7 @@
         "vue": "^2.5.7"
     },
     "dependencies": {
+        "compass-mixins": "^0.12.10",
         "react": "^16.4.2",
         "react-dom": "^16.4.2"
     }

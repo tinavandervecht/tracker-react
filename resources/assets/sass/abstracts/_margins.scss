@@ -1,0 +1,21 @@
+@for $i from 0 through 6 {
+  .m-#{$i} {
+    margin: 16px * $i;
+  }
+
+  .m-t-#{$i} {
+    margin-top: 16px * $i;
+  }
+
+  .m-r-#{$i} {
+    margin-right: 16px * $i;
+  }
+
+  .m-b-#{$i} {
+    margin-bottom: 16px * $i;
+  }
+
+  .m-l-#{$i} {
+    margin-left: 16px * $i;
+  }
+}

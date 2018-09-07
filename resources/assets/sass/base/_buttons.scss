@@ -1,0 +1,17 @@
+.btn {
+    @include transition(0.4s);
+    letter-spacing: 3px;
+}
+
+.btn-default {
+    @include button-variant(#ffffff, $text-color, lighten($text-color, 15%));
+}
+.btn-primary{
+    @include button-variant($btn-primary-color, $btn-primary-bg, $brand-secondary);
+}
+.btn-success {
+    @include button-variant($btn-success-color, $btn-success-bg);
+}
+.btn-danger {
+    @include button-variant($btn-danger-color, $btn-danger-bg);
+}

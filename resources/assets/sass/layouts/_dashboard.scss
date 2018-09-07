@@ -1,0 +1,39 @@
+.dashboard-layout {
+    .container-max {
+        width: calc(100% - 60px);
+        max-width: 1170px;
+        margin: 0 auto;
+    }
+
+    .navigation {
+        width: 60px;
+        position:fixed;
+        height: 100vh;
+        background: darken($text-color, 10%);
+        z-index:2;
+
+        ~ .container-max {
+            padding: 32px;
+            position: absolute;
+            left: 60px;
+            top: 52px;
+            max-width:none;
+        }
+
+        ul {
+            padding:0;
+            list-style-type:none;
+            margin-top:72px;
+
+            li {
+                a {
+                    color:#ffffff;
+                    font-family:$font-family-cursive;
+                    padding:8px 16px;
+                    display:block;
+                    font-size:24px;
+                }
+            }
+        }
+    }
+}
