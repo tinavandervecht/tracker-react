@@ -26,4 +26,14 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * User has many bills
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function bills()
+    {
+        return $this->hasMany(Bill::class);
+    }
 }

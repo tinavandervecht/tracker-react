@@ -5,7 +5,11 @@ import BillCard from './BillCard';
 class BillList extends Component {
     getBillList(bills) {
         if (_.isEmpty(bills)) {
-            return <p>You&#39;re good! No bills here.</p>;
+            return <div className={this.props.listType == 'minimalist' ? '' : 'panel panel-default'}>
+                <div className={this.props.listType == 'minimalist' ? '' : 'panel-body'}>
+                    <p>You&#39;re good! No bills here.</p>
+                </div>
+            </div>
         }
 
         return bills.map((row, key) => (

@@ -3,6 +3,7 @@
 namespace ExpenseTracker\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use ExpenseTracker\User;
 
 class Bill extends Model
 {
@@ -17,4 +18,14 @@ class Bill extends Model
         'due_date',
         'paid'
     ];
+
+    /**
+     * Bill Belongs to User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

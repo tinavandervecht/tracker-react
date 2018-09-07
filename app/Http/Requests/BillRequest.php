@@ -33,4 +33,24 @@ class BillRequest extends Request
             'due_date.numeric' => 'Due Date must be a number',
         ];
     }
+
+    /**
+     * Extend validator and add an after closure
+     *
+     * @return \Illuminate\Contracts\Validation\Validator
+     */
+    protected function getValidatorInstance()
+    {
+        $validator = parent::getValidatorInstance();
+
+        if (!$validator->fails()) {
+            $validator->after(function () use ($validator) {
+                if ($this->input('due_date') < 1 || $this->input('due_date') > 31) {
+                    $validator->errors()->add('due_date', 'Due date must be between 1 and 31.');
+                }
+            });
+        }
+
+        return $validator;
+    }
 }

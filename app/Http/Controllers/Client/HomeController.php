@@ -5,6 +5,7 @@ namespace ExpenseTracker\Http\Controllers\Client;
 use ExpenseTracker\Http\Controllers\Controller;
 use ExpenseTracker\Models\Bill;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -17,7 +18,7 @@ class HomeController extends Controller
     {
         $currentDate = Carbon::now();
         $latestDate = Carbon::now()->addWeeks(2);
-        $bills = Bill::get();
+        $bills = Bill::whereUserId(Auth::user())->get();
         $upcomingBills = $bills->filter(function($bill) use ($currentDate, $latestDate) {
             $year = Carbon::now()->format('Y');
             $month = Carbon::now()->format('m');

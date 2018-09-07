@@ -21726,9 +21726,17 @@ var BillList = function (_Component) {
 
             if (_.isEmpty(bills)) {
                 return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    'p',
-                    null,
-                    'You\'re good! No bills here.'
+                    'div',
+                    { className: this.props.listType == 'minimalist' ? '' : 'panel panel-default' },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: this.props.listType == 'minimalist' ? '' : 'panel-body' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'p',
+                            null,
+                            'You\'re good! No bills here.'
+                        )
+                    )
                 );
             }
 

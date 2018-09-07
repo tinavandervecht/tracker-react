@@ -5,6 +5,7 @@ namespace ExpenseTracker\Http\Controllers\Client\Bills;
 use ExpenseTracker\Http\Controllers\Controller;
 use ExpenseTracker\Http\Requests\BillRequest;
 use ExpenseTracker\Models\Bill;
+use Illuminate\Support\Facades\Auth;
 
 class BillsController extends Controller
 {
@@ -38,7 +39,10 @@ class BillsController extends Controller
      */
     public function store(BillRequest $request)
     {
-        Bill::create($request->all());
+        $bill = Bill::create($request->all());
+
+        $bill->user()->associate(Auth::user());
+        $bill->save();
 
         return redirect()->route('home')->withSuccess('Bill created successfully');
     }
